@@ -1,9 +1,9 @@
 pipeline{
     agent any
     stages{
-        tidy -q -e *.html
         stage('Upload to AWS'){
             steps{
+                tidy -q -e *.html
                 withAWS(region:'us-east-2',credentials:'aws-static') {
                     s3Upload(file:'index.html', bucket:'devops-jenkins-project3', path:'')
                 }
